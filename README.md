@@ -4,15 +4,14 @@
 
 This repository covers methods for analysing DENV data from both the ONT and Illumina platforms.
 
-The methods described here require working conda environments.  
-They will be created below, but first require a working conda installation.  
-One easy method of obtaining this is by following the instructions in the [miniforge](https://github.com/conda-forge/miniforge) repository.
+The methods described here require working conda environments. They will be created during the Installation and Setup sections below, but first require a working conda installation. One easy method of obtaining this is by following the instructions in the [miniforge](https://github.com/conda-forge/miniforge) repository.
 
 ---
 ### ONT data  
 
 #### Installation and Setup
-Follow the instructions here to get everything working by cloning the contents of this repository to your local machine or sever and creating the conda environments.  
+Follow the instructions here to get everything working by cloning the contents of this repository to your local machine/sever and creating the conda environments.  
+Doing this in a location in your [PATH](https://en.wikipedia.org/wiki/PATH_(variable)) (eg. `/usr/local/bin/`)will make the `illumina_plotdepth.sh` script easier to run later - but you can always just refer to this manually instead. 
 
 ```bash
 git clone https://github.com/centre-pathogen-genomics/DENV_Amplicon.git 
@@ -20,8 +19,8 @@ cd DENV_Amplicon
 conda create -f ont_denv.yml
 ```
 
-This uses the artic pipeline with reference genomes and BED files for each DENV serotype.  
-The BASH script below is a slightly modified version of the one written by [Joseph Fauver](https://github.com/josephfauver/DENV_MinION_Script).
+This uses the [artic](https://github.com/artic-network/fieldbioinformatics) pipeline with reference genomes and BED files for each DENV serotype.  
+The BASH script below is a modified version of the one written by [Joseph Fauver](https://github.com/josephfauver/DENV_MinION_Script).
 #### Expected Input
 A single directory (`inputdirectory` in the code block below, but can have any name) with a single fastq.gz file per sample.  
 For example:  
@@ -31,7 +30,7 @@ sampleA.fastq.gz sampleB.fastq.gz
 sampleC.fastq.gz sampleD.fastq.gz
 ``` 
 #### Running the Pipeline
-Use the following command
+Use the following command:
 ```bash
 bash ont_denv.sh inputdirectory outputdirectory
 ```
@@ -77,7 +76,7 @@ total 26696
 -rw-r--r--@ 1 cwwalsh  staff       96 29 Oct 15:30 sampleA.trimmed.rg.sorted.bam.bai
 ```
 
-The paths to the database (referred to artic as the scheme), the expected min and max read lengths, and the model used by medaka to genrate the final consensus sequence should be set correctly by default.  
+The paths to the database (referred to by artic as the scheme), the expected min and max read lengths, and the model used by medaka to genrate the final consensus sequence should be set correctly by default.  
 If you need to change these, you can open the `ont_denv.sh` script in your favourite text editor and modify the `SCHEME_DIR`, `MIN_READLEN`, `MAX_READLEN`, and `MEDAKA_MODEL` varibles respectively.  
 The latter assumes you are using R10.4.1 flow cells, basecalled using the superaccurate model in Dorado.  
 
