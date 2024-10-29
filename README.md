@@ -8,6 +8,7 @@ The methods described here require working conda environments.
 They will be created below, but first require a working conda installation.  
 One easy method of obtaining this is by following the instructions in the [miniforge](https://github.com/conda-forge/miniforge) repository.
 
+---
 ### ONT data  
 
 #### Installation and Setup
@@ -83,6 +84,7 @@ The latter assumes you are using R10.4.1 flow cells, basecalled using the supera
 There is a potential error that can occur if the model of medaka is too new. V2 changed the `medaka consensus` command to `medaka inference`, breaking the step which generates the consensus sequence. Make sure you are using `medaka 1.11.3` using the command `medaka --version`.  
 I haven't tested this - but a possible fix would be to change `medaka consensus` to `medaka inference` in the `minion.py` script - located in your conda environment files (eg. `miniforge3/envs/artic/lib/python3.9/site-packages/artic/`).  
 
+---
 ### Illumina data  
 We use the method described [here](https://github.com/grubaughlab/DENV_pipeline) but with an added step at the end to generate some plots.
 
