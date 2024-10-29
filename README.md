@@ -81,12 +81,13 @@ The paths to the database (referred to artic as the scheme), the expected min an
 If you need to change these, you can open the `ont_denv.sh` script in your favourite text editor and modify the `SCHEME_DIR`, `MIN_READLEN`, `MAX_READLEN`, and `MEDAKA_MODEL` varibles respectively.  
 The latter assumes you are using R10.4.1 flow cells, basecalled using the superaccurate model in Dorado.  
 
-There is a potential error that can occur if the model of medaka is too new. V2 changed the `medaka consensus` command to `medaka inference`, breaking the step which generates the consensus sequence. Make sure you are using `medaka 1.11.3` using the command `medaka --version`.  
+There is a potential error that can occur if the model of medaka is too new.   
+`medaka 2.x.x` changed the `medaka consensus` command to `medaka inference`, breaking the step which generates the consensus sequence. Make sure you are using `medaka 1.11.3` using the command `medaka --version`.  
 I haven't tested this - but a possible fix would be to change `medaka consensus` to `medaka inference` in the `minion.py` script - located in your conda environment files (eg. `miniforge3/envs/artic/lib/python3.9/site-packages/artic/`).  
 
 ---
 ### Illumina data  
-We use the method described [here](https://github.com/grubaughlab/DENV_pipeline) but with an added step at the end to generate some plots.
+We will use the method described [here](https://github.com/grubaughlab/DENV_pipeline) but with an added step at the end to generate some plots.
 
 #### Installation and Setup
 ```bash
@@ -111,7 +112,7 @@ while read i ; do mv $i*R2*fastq.gz $i ; done < names
 rm names
 ```
 
-Your inputdirectory should look something like this:
+Your `inputdirectory` should look something like this:
 ```bash
 $ ls inputdirectory
 sampleA sampleB sampleC sampleD
