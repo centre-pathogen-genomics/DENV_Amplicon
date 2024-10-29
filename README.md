@@ -11,7 +11,7 @@ The methods described here require working conda environments. They will be crea
 
 #### Installation and Setup
 Follow the instructions here to get everything working by cloning the contents of this repository to your local machine/sever and creating the conda environments.  
-Doing this in a location in your [PATH](https://en.wikipedia.org/wiki/PATH_(variable)) (eg. `/usr/local/bin/`)will make the `illumina_plotdepth.sh` script easier to run later - but you can always just refer to this manually instead. 
+Doing this in a location in your [PATH](https://en.wikipedia.org/wiki/PATH_(variable)) (eg. `/usr/local/bin/`) will make the `illumina_plotdepth.sh` script easier to run later - but you can always just refer to this manually instead. 
 
 ```bash
 git clone https://github.com/centre-pathogen-genomics/DENV_Amplicon.git 
