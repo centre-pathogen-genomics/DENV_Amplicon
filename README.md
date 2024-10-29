@@ -20,7 +20,7 @@ conda create -f ont_denv.yml
 ```
 
 This uses the [artic](https://github.com/artic-network/fieldbioinformatics) pipeline with reference genomes and BED files for each DENV serotype.  
-The BASH script below is a modified version of the one written by [Joseph Fauver](https://github.com/josephfauver/DENV_MinION_Script).
+The BASH script used below to run the pipeline is a version of the one written by [Joseph Fauver](https://github.com/josephfauver/DENV_MinION_Script), modified to fit the input format that we generate.
 #### Expected Input
 A single directory (`inputdirectory` in the code block below, but can have any name) with a single fastq.gz file per sample.  
 For example:  
