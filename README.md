@@ -14,7 +14,7 @@ One easy method of obtaining this is by following the instructions in the [minif
 Follow the instructions here to get everything working by cloning the contents of this repository to your local machine or sever and creating the conda environments.  
 
 ```bash
-git clone xxxxx  
+git clone https://github.com/centre-pathogen-genomics/DENV_Amplicon.git 
 cd DENV_Amplicon
 conda create -f ont_denv.yml
 ```
