@@ -16,7 +16,8 @@ Doing this in a location in your [PATH](https://en.wikipedia.org/wiki/PATH_(vari
 ```bash
 git clone https://github.com/centre-pathogen-genomics/DENV_Amplicon.git 
 cd DENV_Amplicon
-conda create -f ont_denv.yml
+conda env create -n ont_denv.yml -c bioconda medaka=1.11.3 artic
+mv ont_denv.sh ../
 ```
 
 This uses the [artic](https://github.com/artic-network/fieldbioinformatics) pipeline with reference genomes and BED files for each DENV serotype.  

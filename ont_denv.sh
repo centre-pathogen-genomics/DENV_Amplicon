@@ -22,9 +22,9 @@ MEDAKA_MODEL=r1041_e82_400bps_sup_v4.2.0
 
 ## positional argument specifying absolute path to directory in which fastqs are located:
 ## this should be a directory containing one file per sample, (e.g. "DMG2404857_2.fastq.gz")
-READS_DIR="$(realpath "$1")"
+READS_DIR=$1
 ## positional argument specifying absolute path to output directory:
-OUTDIR="$(realpath)"/$2""
+OUTDIR=$2
 
 # make output directory
 mkdir ${OUTDIR}
