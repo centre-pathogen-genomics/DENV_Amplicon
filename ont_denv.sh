@@ -9,7 +9,7 @@
 ################################################################################################
 
 ## path to scheme directory:
-SCHEME_DIR="$(realpath "$0")/DENV_Schemes"
+SCHEME_DIR="$(dirname "$(realpath "$0")")/DENV_Amplicon/DENV_Schemes"
 ## provide mininum and maximum read lengths for guppyplex to keep
 MIN_READLEN=400
 MAX_READLEN=700
