@@ -9,7 +9,7 @@ The methods described here require working conda environments. They will be crea
 ---
 ### ONT data  
 
-This uses the [artic](https://github.com/artic-network/fieldbioinformatics) pipeline to assemble genomes and Nextclade for quality control and comparison to the reference genome.  
+This uses the [artic](https://github.com/artic-network/fieldbioinformatics) pipeline to assemble genomes, Nextclade for quality control and comparison to the reference genome, and [csvtk](https://github.com/shenwei356/csvtk) to generate depth (of coverage) plots.   
 The BASH script used below to run the pipeline is a modified version of the one written by [Joseph Fauver](https://github.com/josephfauver/DENV_MinION_Script).  
 
 #### Installation and Setup
@@ -20,7 +20,7 @@ mkdir ~/Tools/
 cd ~/Tools/
 git clone https://github.com/centre-pathogen-genomics/DENV_Amplicon.git 
 cd DENV_Amplicon
-conda create -n ont_denv -c bioconda medaka=1.11.3 artic nextclade
+conda create -n ont_denv -c bioconda csvtk medaka=1.11.3 artic nextclade -y
 conda activate ont_denv
 ```
 
@@ -46,11 +46,10 @@ sampleC.fastq.gz sampleD.fastq.gz
 #### Running the Pipeline
 Make sure the `ont_denv` conda environment is active and use the following command:
 ```bash
-conda activate ont_denv
 bash ~/Tools/DENV_Amplicon/ont_denv.sh inputdirectory outputdirectory
 ```
 
-Make sure you run the script with `bash` instead of `sh` - otherwise the step which determines the serotype will not run correctly and will default to DENV1
+Ensure you run the script with `bash` instead of `sh` - otherwise the step which determines the serotype will not run correctly and will default to DENV1
 
 #### Expected Output
 A single directory (`outputdirectory` in the code block above, but can have any name) containing a subdirectory for each sample - the names will be taken from the names of the input fastq.gz files,  
@@ -73,6 +72,8 @@ total 26696
 -rw-r--r--@ 1 cwwalsh  staff       86 29 Oct 15:32 sampleA.coverage_mask.txt
 -rw-r--r--@ 1 cwwalsh  staff   234820 29 Oct 15:32 sampleA.coverage_mask.txt.1.depths
 -rw-r--r--@ 1 cwwalsh  staff   235833 29 Oct 15:32 sampleA.coverage_mask.txt.2.depths
+-rw-r--r--@ 1 cwwalsh  staff     9021 29 Oct 15:31 sampleA.depths.pdf
+-rw-r--r--@ 1 cwwalsh  staff     9021 29 Oct 15:31 sampleA.depths.txt
 -rw-r--r--@ 1 cwwalsh  staff     9021 29 Oct 15:31 sampleA.fail.vcf
 -rw-r--r--@ 1 cwwalsh  staff    76971 29 Oct 15:31 sampleA.merged.vcf
 -rw-r--r--@ 1 cwwalsh  staff     4371 29 Oct 15:31 sampleA.merged.vcf.gz

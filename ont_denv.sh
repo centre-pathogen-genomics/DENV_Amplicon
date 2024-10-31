@@ -137,6 +137,21 @@ do
 		--output-all Nextclade \
 		${SAMPLE}.consensus.fasta
 
+	cat ${SAMPLE}.coverage_mask.txt.1.depths ${SAMPLE}.coverage_mask.txt.2.depths > ${SAMPLE}.depths.txt
+	
+	csvtk plot line \
+		-t \
+		-H \
+		-x 3 \
+		-y 4 \
+		-g 2 \
+		--point-size 0.01 \
+		--legend-top \
+		--xlab Position \
+		--ylab Depth \
+		-o ${SAMPLE}.depths.pdf \
+		${SAMPLE}.depths.txt
+
 	cd ..
 
 done < .temp_fofn
