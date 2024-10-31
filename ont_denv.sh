@@ -8,9 +8,6 @@
 ######################### SPECIFY VARIABLES NEEDED TO RUN THE PIPELINE #########################
 ################################################################################################
 
-## provide mininum and maximum read lengths for guppyplex to keep
-MIN_READLEN=400
-MAX_READLEN=700
 ## assign the appropriate medaka model based on sequencing and basecalling parameters
 MEDAKA_MODEL=r1041_e82_400bps_sup_v4.2.0
 # capute working directory
@@ -45,7 +42,7 @@ echo ""
 #### runs the pipeline, looping over each line in input list ####
 #################################################################
 cd ${OUTDIR}
-echo > serotypes.tsv
+
 while read SAMPLE
 do
 
@@ -106,7 +103,7 @@ do
 		echo "** NO READS MAPPED; ASSINGING SEROTYPE DENV1 BY DEFAULT."
 		echo "********************************************************"
 		echo ""
-		SEROTYPE=DENV1
+		SEROTYPE="DENV1"
 	else
 		
 		echo "      ***********************************"
@@ -116,11 +113,6 @@ do
 	fi
 
 	rm *.bam
-
-	echo "***********************************************"
-	echo "** STARTING ARTIC PIPELINE FOR" ${SAMPLE}"..."
-	echo "***********************************************"
-	echo ""
 
 	mkdir ${SAMPLE}
 	cd ${SAMPLE}
@@ -143,7 +135,7 @@ do
 	nextclade run \
 		--input-dataset "$(dirname "$(realpath "$0")")/DENV_Nextclade/${SEROTYPE}" \
 		--output-all ${SAMPLE}/Nextclade \
-		${SAMPLE}/${SAMPLE}.consensus.fasta
+		${SAMPLE}.consensus.fasta
 
 	cd ..
 

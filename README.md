@@ -92,9 +92,10 @@ total 26696
 -rw-r--r--@ 1 cwwalsh  staff  2716512 29 Oct 15:30 sampleA.trimmed.rg.sorted.bam
 -rw-r--r--@ 1 cwwalsh  staff       96 29 Oct 15:30 sampleA.trimmed.rg.sorted.bam.bai
 ```
-There will also be a file called `nextclade.tsv` in `outputdirectory` which described the quality control and serotype assignment results for each sample.  
+There will also be a file called `nextclade.tsv` in `outputdirectory` which describes the quality control and serotype assignment results for each sample.  
 
-The paths to the database (referred to by artic as the scheme) and the model used by medaka to generate the final consensus sequence are hardcoded at the beginning of the script.  
+#### Considerations
+The paths to the databases and the model used by medaka to generate the final consensus sequence are hardcoded at the beginning of the script.  
 If you need to change these, you can open the `ont_denv.sh` script in your favourite text editor and modify the `SCHEME_DIR` and `MEDAKA_MODEL` varibles respectively.  
 The latter assumes you are using R10.4.1 flow cells, basecalled using the superaccurate model in Dorado.  
 
