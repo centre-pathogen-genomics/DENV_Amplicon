@@ -9,47 +9,58 @@ The methods described here require working conda environments. They will be crea
 ---
 ### ONT data  
 
+This uses the [artic](https://github.com/artic-network/fieldbioinformatics) pipeline to assemble genomes and Nextclade for quality control and comparison to the reference genome.  
+The BASH script used below to run the pipeline is a modified version of the one written by [Joseph Fauver](https://github.com/josephfauver/DENV_MinION_Script).  
+
 #### Installation and Setup
 Follow the instructions here to get everything working by cloning the contents of this repository to your local machine/sever and creating the conda environments.  
 You can install this anywhere, but for the purposes for this documentation we will do it in a new directory called `Tools/` in your home directory (`~`) to make it easy. 
-
 ```bash
 mkdir ~/Tools/
 cd ~/Tools/
 git clone https://github.com/centre-pathogen-genomics/DENV_Amplicon.git 
 cd DENV_Amplicon
-conda env create -n ont_denv -c bioconda medaka=1.11.3 artic
-cd ~
+conda create -n ont_denv -c bioconda medaka=1.11.3 artic nextclade
+conda activate ont_denv
 ```
 
-This uses the [artic](https://github.com/artic-network/fieldbioinformatics) pipeline with reference genomes and BED files for each DENV serotype.  
-The BASH script used below to run the pipeline is a version of the one written by [Joseph Fauver](https://github.com/josephfauver/DENV_MinION_Script), modified to fit the input format that we generate.
+The next step is to make sure we have the Dengue virus reference database for Nextclade.  
+```bash
+nextclade dataset get -n community/v-gen-lab/dengue/denv1 -o DENV_Nextclade/DENV1
+nextclade dataset get -n community/v-gen-lab/dengue/denv2 -o DENV_Nextclade/DENV2
+nextclade dataset get -n community/v-gen-lab/dengue/denv3 -o DENV_Nextclade/DENV3
+nextclade dataset get -n community/v-gen-lab/dengue/denv4 -o DENV_Nextclade/DENV4
+```
+
 #### Expected Input
 A single directory (`inputdirectory` in the code block below, but can have any name) with a single fastq.gz file per sample.  
+
 For example:  
 ```bash
 $ ls inputdirectory
 sampleA.fastq.gz sampleB.fastq.gz  
 sampleC.fastq.gz sampleD.fastq.gz
 ``` 
+
 #### Running the Pipeline
-Make sure the `ont_denv` conda environment is active.  
-Use the following command:
+Make sure the `ont_denv` conda environment is active and use the following command:
 ```bash
 conda activate ont_denv
 bash ~/Tools/DENV_Amplicon/ont_denv.sh inputdirectory outputdirectory
 ```
+
 Make sure you run the script with `bash` instead of `sh` - otherwise the step which determines the serotype will not run correctly and will default to DENV1
 
 #### Expected Output
 A single directory (`outputdirectory` in the code block above, but can have any name) containing a subdirectory for each sample - the names will be taken from the names of the input fastq.gz files,  
 Each sample subdirectory will have loads of different files, following the same naming scheme as the sample subdirectory.  
+
 For example: 
 ```bash
 $ ls outputdirectory
 sampleA sampleB sampleC sampleD
 
-$ ls outputdirectory/sampleA/
+$ ls -l outputdirectory/sampleA/
 total 26696
 -rw-r--r--@ 1 cwwalsh  staff   348649 29 Oct 15:31 sampleA.1.hdf
 -rw-r--r--@ 1 cwwalsh  staff    11549 29 Oct 15:31 sampleA.1.vcf
@@ -81,8 +92,8 @@ total 26696
 -rw-r--r--@ 1 cwwalsh  staff       96 29 Oct 15:30 sampleA.trimmed.rg.sorted.bam.bai
 ```
 
-The paths to the database (referred to by artic as the scheme), the expected min and max read lengths, and the model used by medaka to genrate the final consensus sequence should be set correctly by default.  
-If you need to change these, you can open the `ont_denv.sh` script in your favourite text editor and modify the `SCHEME_DIR`, `MIN_READLEN`, `MAX_READLEN`, and `MEDAKA_MODEL` varibles respectively.  
+The paths to the database (referred to by artic as the scheme) and the model used by medaka to genrate the final consensus sequence are hardcoded at the beginning of the script.  
+If you need to change these, you can open the `ont_denv.sh` script in your favourite text editor and modify the `SCHEME_DIR` and `MEDAKA_MODEL` varibles respectively.  
 The latter assumes you are using R10.4.1 flow cells, basecalled using the superaccurate model in Dorado.  
 
 There is a potential error that can occur if the model of medaka is too new.   
@@ -90,7 +101,9 @@ There is a potential error that can occur if the model of medaka is too new.
 I haven't tested this - but a possible fix would be to change `medaka consensus` to `medaka inference` in the `minion.py` script - located in your conda environment files (eg. `miniforge3/envs/artic/lib/python3.9/site-packages/artic/`).  
 
 ---
+
 ### Illumina data  
+
 We will use the method described [here](https://github.com/grubaughlab/DENV_pipeline) but with an added step at the end to generate some plots.
 
 #### Installation and Setup
@@ -143,6 +156,7 @@ You can run the pipeline with the default settings using the command below. If y
 conda activate illumina_denv
 denv_pipeline --indir inputdirectory --outdir outputdirectory
 ```
+
 If you are using modified parameters for every run, then I suggest storing these in a config file and specifying with `--config` for convenience.
 
 #### Expected Output  
@@ -158,6 +172,7 @@ bam_files                 depth                     low_coverage_consensus    to
 $ ls outputdirectory/results/consensus_sequences
 sampleA.DENV2.10.cons.fa          sampleB.DENV3.10.cons.fa          sampleC.DENV3.10.cons.fa          sampleD.DENV1.10.cons.fa 
 ```
+
 The consensus sequences will be named `samplename`.`serotype`.`depth`.cons.fa
 
 #### Generating Depth Plots
