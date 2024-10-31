@@ -9,7 +9,7 @@ The methods described here require working conda environments. They will be crea
 ---
 ### ONT data  
 
-This uses the [artic](https://github.com/artic-network/fieldbioinformatics) pipeline to assemble genomes, Nextclade for quality control and comparison to the reference genome, and [csvtk](https://github.com/shenwei356/csvtk) to generate depth (of coverage) plots.   
+This uses the [artic](https://github.com/artic-network/fieldbioinformatics) pipeline to assemble genomes, [Nextclade](https://github.com/nextstrain/nextclade) for quality control and comparison to the reference genome, and [csvtk](https://github.com/shenwei356/csvtk) to generate depth (of coverage) plots.   
 The BASH script used below to run the pipeline is a modified version of the one written by [Joseph Fauver](https://github.com/josephfauver/DENV_MinION_Script).  
 
 #### Installation and Setup
@@ -98,7 +98,7 @@ There will also be a file called `nextclade.tsv` in `outputdirectory` which desc
 #### Considerations
 The paths to the databases and the model used by medaka to generate the final consensus sequence are hardcoded at the beginning of the script.  
 If you need to change these, you can open the `ont_denv.sh` script in your favourite text editor and modify the `SCHEME_DIR` and `MEDAKA_MODEL` varibles respectively.  
-The latter assumes you are using R10.4.1 flow cells, basecalled using the superaccurate model in Dorado.  
+The default value of the latter assumes you are using R10.4.1 flow cells, basecalled using the superaccurate model in Dorado.  
 
 There is a potential error that can occur if the model of medaka is too new.   
 `medaka 2.x.x` changed the `medaka consensus` command to `medaka inference`, breaking the step which generates the consensus sequence. Make sure you are using `medaka 1.11.3` using the command `medaka --version`. Specifying the medaka version while creating the conda env above should solve this though  
