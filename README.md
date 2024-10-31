@@ -18,7 +18,7 @@ mkdir ~/Tools/
 cd ~/Tools/
 git clone https://github.com/centre-pathogen-genomics/DENV_Amplicon.git 
 cd DENV_Amplicon
-conda env create -n ont_denv.yml -c bioconda medaka=1.11.3 artic
+conda env create -n ont_denv -c bioconda medaka=1.11.3 artic
 cd ~
 ```
 
@@ -33,11 +33,13 @@ sampleA.fastq.gz sampleB.fastq.gz
 sampleC.fastq.gz sampleD.fastq.gz
 ``` 
 #### Running the Pipeline
+Make sure the `ont_denv` conda environment is active.  
 Use the following command:
 ```bash
+conda activate ont_denv
 bash ~/Tools/DENV_Amplicon/ont_denv.sh inputdirectory outputdirectory
 ```
-make sure you run the script with `bash` instead of `sh` - otherwise the step which determines the serotype will not run correctly and will default to DENV1
+Make sure you run the script with `bash` instead of `sh` - otherwise the step which determines the serotype will not run correctly and will default to DENV1
 
 #### Expected Output
 A single directory (`outputdirectory` in the code block above, but can have any name) containing a subdirectory for each sample - the names will be taken from the names of the input fastq.gz files,  
@@ -138,6 +140,7 @@ sampleD_S4_L001_R1_001.fastq.gz sampleD_S4_L001_R2_001.fastq.gz
 #### Running the Pipeline
 You can run the pipeline with the default settings using the command below. If you want to modify anything, then refer to the source [repository](https://github.com/grubaughlab/DENV_pipeline) for more information.  
 ```bash
+conda activate illumina_denv
 denv_pipeline --indir inputdirectory --outdir outputdirectory
 ```
 If you are using modified parameters for every run, then I suggest storing these in a config file and specifying with `--config` for convenience.
