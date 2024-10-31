@@ -161,7 +161,7 @@ The consensus sequences will be named `samplename`.`serotype`.`depth`.cons.fa
 This can be useful for troubleshooting amplicon dropouts - something that happened with covid as the virus gathered mutations in the primer binding regions.  
 Just point the script towards the output directory from the previous step (`outputdirectory` in the example above). Tt will plot the depth at each position on the genome and store the outputs in `outputdirectory/depth/`.  
 ```bash
-sh denv_illumina_plotdepth.sh outputdirectory
+sh ~/Tools/DENV_Amplicon/denv_illumina_plotdepth.sh outputdirectory
 ```
 
 
