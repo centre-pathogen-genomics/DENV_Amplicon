@@ -8,8 +8,6 @@
 ######################### SPECIFY VARIABLES NEEDED TO RUN THE PIPELINE #########################
 ################################################################################################
 
-## path to scheme directory:
-SCHEME_DIR="$(dirname "$(realpath "$0")")/DENV_Amplicon/DENV_Schemes"
 ## provide mininum and maximum read lengths for guppyplex to keep
 MIN_READLEN=400
 MAX_READLEN=700
@@ -25,6 +23,8 @@ MEDAKA_MODEL=r1041_e82_400bps_sup_v4.2.0
 READS_DIR=$1
 ## positional argument specifying absolute path to output directory:
 OUTDIR=$2
+## path to scheme directory:
+SCHEME_DIR="$(dirname "$(realpath "$0")")/DENV_Schemes"
 
 # make output directory
 mkdir ${OUTDIR}

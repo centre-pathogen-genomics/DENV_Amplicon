@@ -11,13 +11,14 @@ The methods described here require working conda environments. They will be crea
 
 #### Installation and Setup
 Follow the instructions here to get everything working by cloning the contents of this repository to your local machine/sever and creating the conda environments.  
-Doing this in a location in your [PATH](https://en.wikipedia.org/wiki/PATH_(variable)) (eg. `/usr/local/bin/`) will make the `illumina_plotdepth.sh` script easier to run later - but you can always just refer to this manually instead. 
+You can install this anywhere, but for the purposes for this documentation we will do it in a new directory called `Tools/` in the `/home` directory to make it easy. 
 
 ```bash
+mkdir ~/Tools/
+cd ~/Tools/
 git clone https://github.com/centre-pathogen-genomics/DENV_Amplicon.git 
 cd DENV_Amplicon
 conda env create -n ont_denv.yml -c bioconda medaka=1.11.3 artic
-mv ont_denv.sh ../
 ```
 
 This uses the [artic](https://github.com/artic-network/fieldbioinformatics) pipeline with reference genomes and BED files for each DENV serotype.  
