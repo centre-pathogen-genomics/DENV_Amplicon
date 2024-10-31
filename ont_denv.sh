@@ -115,7 +115,6 @@ do
 		echo ""
 	fi
 
-	echo -e "${SAMPLE}\t${SEROTYPE}" >> serotypes.tsv
 	rm *.bam
 
 	echo "***********************************************"
@@ -141,11 +140,18 @@ do
 	echo ""
 	echo ""
 
+	nextclade run \
+		--input-dataset "$(dirname "$(realpath "$0")")/DENV_Nextclade/${SEROTYPE}" \
+		--output-all ${SAMPLE}/Nextclade \
+		${SAMPLE}/${SAMPLE}.consensus.fasta
+
 	cd ..
 
 done < temp_fofn
 
-rm -f temp_fofn
+(cat $(ls */Nextclade/*.tsv | head -n 1) && tail -n +2 -q */Nextclade/*.tsv) > nextclade.tsv
+
+rm -f temp_fofn 
 
 echo "ALL ANALYSES COMPLETE. GOODBYE."
 echo""
