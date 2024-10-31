@@ -28,7 +28,7 @@ SCHEME_DIR="$(dirname "$(realpath "$0")")/DENV_Schemes"
 # make output directory
 mkdir ${OUTDIR}
 # make fofn of input FASTQs
-ls ${READS_DIR}/*.fastq.gz | sed 's,.*/,, ; s,.fastq.gz,,' > ${OUTDIR}/temp_fofn
+ls ${READS_DIR}/*.fastq.gz | sed 's,.*/,, ; s,.fastq.gz,,' > ${OUTDIR}/.temp_fofn
 ######################################################
 #### reports how many samples are being processed ####
 ######################################################
@@ -134,12 +134,12 @@ do
 
 	nextclade run \
 		--input-dataset "$(dirname "$(realpath "$0")")/DENV_Nextclade/${SEROTYPE}" \
-		--output-all ${SAMPLE}/Nextclade \
+		--output-all Nextclade \
 		${SAMPLE}.consensus.fasta
 
 	cd ..
 
-done < temp_fofn
+done < .temp_fofn
 
 (cat $(ls */Nextclade/*.tsv | head -n 1) && tail -n +2 -q */Nextclade/*.tsv) > nextclade.tsv
 
