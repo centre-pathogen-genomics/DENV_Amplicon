@@ -13,6 +13,8 @@ MIN_READLEN=400
 MAX_READLEN=700
 ## assign the appropriate medaka model based on sequencing and basecalling parameters
 MEDAKA_MODEL=r1041_e82_400bps_sup_v4.2.0
+# capute working directory
+BASE_DIR="$(pwd)"
 
 ################################################################################################
 ######################### SHOULD NOT NEED TO EDIT CODE BELOW THIS LINE #########################
@@ -20,9 +22,9 @@ MEDAKA_MODEL=r1041_e82_400bps_sup_v4.2.0
 
 ## positional argument specifying absolute path to directory in which fastqs are located:
 ## this should be a directory containing one file per sample, (e.g. "DMG2404857_2.fastq.gz")
-READS_DIR=$1
+READS_DIR=${BASE_DIR}/$1
 ## positional argument specifying absolute path to output directory:
-OUTDIR=$2
+OUTDIR=${BASE_DIR}/$2
 ## path to scheme directory:
 SCHEME_DIR="$(dirname "$(realpath "$0")")/DENV_Schemes"
 

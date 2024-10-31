@@ -11,7 +11,7 @@ The methods described here require working conda environments. They will be crea
 
 #### Installation and Setup
 Follow the instructions here to get everything working by cloning the contents of this repository to your local machine/sever and creating the conda environments.  
-You can install this anywhere, but for the purposes for this documentation we will do it in a new directory called `Tools/` in the `/home` directory to make it easy. 
+You can install this anywhere, but for the purposes for this documentation we will do it in a new directory called `Tools/` in your home directory (`~`) to make it easy. 
 
 ```bash
 mkdir ~/Tools/
@@ -19,6 +19,7 @@ cd ~/Tools/
 git clone https://github.com/centre-pathogen-genomics/DENV_Amplicon.git 
 cd DENV_Amplicon
 conda env create -n ont_denv.yml -c bioconda medaka=1.11.3 artic
+cd ~
 ```
 
 This uses the [artic](https://github.com/artic-network/fieldbioinformatics) pipeline with reference genomes and BED files for each DENV serotype.  
@@ -34,7 +35,7 @@ sampleC.fastq.gz sampleD.fastq.gz
 #### Running the Pipeline
 Use the following command:
 ```bash
-bash ont_denv.sh inputdirectory outputdirectory
+bash ~/Tools/DENV_Amplicon/ont_denv.sh inputdirectory outputdirectory
 ```
 make sure you run the script with `bash` instead of `sh` - otherwise the step which determines the serotype will not run correctly and will default to DENV1
 
