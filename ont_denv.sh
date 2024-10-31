@@ -115,7 +115,7 @@ do
 		echo ""
 	fi
 
-	echo ${SAMPLE}"\t"${SEROTYPE} >> serotypes.tsv
+	echo -e "${SAMPLE}\t${SEROTYPE}" >> serotypes.tsv
 	rm *.bam
 
 	echo "***********************************************"
