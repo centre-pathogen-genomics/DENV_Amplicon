@@ -84,7 +84,7 @@ If you need to change these, you can open the `ont_denv.sh` script in your favou
 The latter assumes you are using R10.4.1 flow cells, basecalled using the superaccurate model in Dorado.  
 
 There is a potential error that can occur if the model of medaka is too new.   
-`medaka 2.x.x` changed the `medaka consensus` command to `medaka inference`, breaking the step which generates the consensus sequence. Make sure you are using `medaka 1.11.3` using the command `medaka --version`.  
+`medaka 2.x.x` changed the `medaka consensus` command to `medaka inference`, breaking the step which generates the consensus sequence. Make sure you are using `medaka 1.11.3` using the command `medaka --version`. Specifying the medaka version while creating the conda env above should solve this though  
 I haven't tested this - but a possible fix would be to change `medaka consensus` to `medaka inference` in the `minion.py` script - located in your conda environment files (eg. `miniforge3/envs/artic/lib/python3.9/site-packages/artic/`).  
 
 ---
@@ -93,12 +93,14 @@ We will use the method described [here](https://github.com/grubaughlab/DENV_pipe
 
 #### Installation and Setup
 ```bash
+cd ~/Tools
 git clone https://github.com/grubaughlab/DENV_pipeline.git
 cd DENV_pipeline
 conda env create -f environment.yml -n illumina_denv
 conda activate illumina_denv
 pip install .
 conda install csvtk -y
+cd ~
 ```
 Testing the installation using `denv_pipeline -h` should print the available options.  
 
