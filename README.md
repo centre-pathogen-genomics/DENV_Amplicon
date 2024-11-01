@@ -134,7 +134,7 @@ cd ~
 Testing the installation using `denv_pipeline -h` should print the available options.  
 
 #### Optional Step
-If you do not have the ONT analysis repository installed, then this is the point at which you should `wget` or `curl` the utility scripts mentioned in the Considerations section near the top of this README.  
+If you do not have the ONT analysis repository installed, then this is the point at which you should `wget` or `curl` the utility scripts mentioned in the Considerations section near the top of this page.  
 Make sure to edit the path to the scripts when using them in the final two steps below.    
 If you have the ONT analysis repository installed, then skip this.  
 ```bash
