@@ -9,7 +9,7 @@ The methods described here require working conda environments. They will be crea
 #### Considerations
 I have tried to make this as simple as possible but there are some annoying things to be aware of.  
 The easiest way to avoid having to think about these is to follow the installation guides for both the ONT and Illumina analysis tools so that they are both available.  
-Cloning the ONT analysis repo (the one which generates the `DENV_Amplicon` conda environment) will also give you two utility scripts for the Illumina data:
+Cloning the ONT analysis repo (the one which generates the `ont_denv` conda environment) will also give you two utility scripts for the Illumina data:
 
 * [illumina_plotdepth.sh](https://raw.githubusercontent.com/centre-pathogen-genomics/DENV_Amplicon/refs/heads/main/illumina_plotdepth.sh) to plot the depth (of coverage) of each position along the reference  
 * [illumina_nextclade.sh](https://raw.githubusercontent.com/centre-pathogen-genomics/DENV_Amplicon/refs/heads/main/illumina_nextclade.sh) to run Nextclade on consensus assemblies for QC and comparison to the reference.
