@@ -13,7 +13,7 @@ This uses the [artic](https://github.com/artic-network/fieldbioinformatics) pipe
 The BASH script used below to run the pipeline is a modified version of the one written by [Joseph Fauver](https://github.com/josephfauver/DENV_MinION_Script).  
 
 #### Installation and Setup
-Follow the instructions here to get everything working by cloning the contents of this repository to your local machine/sever and creating the conda environments.  
+The commands in the code block below will get everything working by cloning the contents of this repository to your local machine/sever, creating the conda environments, and downloading the Nextclade reference genomes.  
 You can install this anywhere, but for the purposes for this documentation we will do it in a new directory called `Tools/` in your home directory (`~`) to make it easy. 
 ```bash
 mkdir ~/Tools/
@@ -22,10 +22,6 @@ git clone https://github.com/centre-pathogen-genomics/DENV_Amplicon.git
 cd DENV_Amplicon
 conda create -n ont_denv -c bioconda csvtk medaka=1.11.3 artic nextclade -y
 conda activate ont_denv
-```
-
-The next step is to make sure we have the Dengue virus reference database for Nextclade.  
-```bash
 nextclade dataset get -n community/v-gen-lab/dengue/denv1 -o DENV_Nextclade/DENV1
 nextclade dataset get -n community/v-gen-lab/dengue/denv2 -o DENV_Nextclade/DENV2
 nextclade dataset get -n community/v-gen-lab/dengue/denv3 -o DENV_Nextclade/DENV3
