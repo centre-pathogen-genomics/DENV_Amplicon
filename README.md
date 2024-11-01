@@ -4,7 +4,17 @@
 
 This repository covers methods for analysing DENV data from both the ONT and Illumina platforms.
 
-The methods described here require working conda environments. They will be created during the Installation and Setup sections below, but first require a working conda installation. One easy method of obtaining this is by following the instructions in the [miniforge](https://github.com/conda-forge/miniforge) repository.
+The methods described here require working conda environments. They will be created during the Installation and Setup sections below, but first require a working conda installation. One easy method of obtaining this is by following the instructions in the [miniforge](https://github.com/conda-forge/miniforge) repository.  
+
+#### Considerations
+I have tried to make this as simple as possible but there are some annoying things to be aware of.  
+The easiest way to avoid having to think about these is to follow the installation guides for both the ONT and Illumina analysis tools so that they are both available.  
+Cloning the ONT analysis repo (the one which generates the `DENV_Amplicon` conda environment) will also give you two utility scripts for the Illumina data:
+
+* [illumina_plotdepth.sh](https://raw.githubusercontent.com/centre-pathogen-genomics/DENV_Amplicon/refs/heads/main/illumina_plotdepth.sh) to plot the depth (of coverage) of each position along the reference  
+* [illumina_nextclade.sh](https://raw.githubusercontent.com/centre-pathogen-genomics/DENV_Amplicon/refs/heads/main/illumina_nextclade.sh) to run Nextclade on consensus assemblies for QC and comparison to the reference.
+
+If you are only going to be using Illumina data and don't want to install the repository for ONT data, then you can `wget` or `curl` the scripts directly using the links above.
 
 ---
 ### ONT data  
@@ -91,7 +101,7 @@ total 26696
 ```
 There will also be a file called `nextclade.tsv` in `outputdirectory` which describes the quality control and serotype assignment results for each sample.  
 
-#### Considerations
+#### ONT-specific Considerations
 The paths to the databases and the model used by medaka to generate the final consensus sequence are hardcoded at the beginning of the script.  
 If you need to change these, you can open the `ont_denv.sh` script in your favourite text editor and modify the `SCHEME_DIR` and `MEDAKA_MODEL` varibles respectively.  
 The default value of the latter assumes you are using R10.4.1 flow cells, basecalled using the superaccurate model in Dorado.  
@@ -104,7 +114,7 @@ I haven't tested this - but a possible fix would be to change `medaka consensus`
 
 ### Illumina data  
 
-We will use the method described [here](https://github.com/grubaughlab/DENV_pipeline) but with added steps at the end to generate coverage plots and run Nextclade.  
+We will use the method described [here](https://github.com/grubaughlab/DENV_pipeline) but with added steps at the end to generate coverage plots and run Nextclade (see the Considerations section near the top for more info).  
 
 #### Installation and Setup
 ```bash
@@ -122,6 +132,17 @@ nextclade dataset get -n community/v-gen-lab/dengue/denv4 -o DENV_Nextclade/DENV
 cd ~
 ```
 Testing the installation using `denv_pipeline -h` should print the available options.  
+
+#### Optional Step
+If you do not have the ONT analysis repository installed, then this is the point at which you should `wget` or `curl` the utility scripts mentioned in the Considerations section near the top of this README.  
+Make sure to edit the path to the scripts when using them in the final two steps below.    
+If you have the ONT analysis repository installed, then skip this.  
+```bash
+cd ~/Tools/DENV_pipeline
+wget https://raw.githubusercontent.com/centre-pathogen-genomics/DENV_Amplicon/refs/heads/main/illumina_plotdepth.sh
+wget https://raw.githubusercontent.com/centre-pathogen-genomics/DENV_Amplicon/refs/heads/main/illumina_nextclade.sh
+cd ~
+```
 
 #### Expected Input
 The expected input is kinda clunky - depending on how your sequencer outputs your FASTQ reads.  There needs to be a single directory (`inputdirectory` in the code block below, but can have any name)  with a subdirectory for each sample.  Each subdirectory should contain forward and reverse read files with `R1` and `R2` somewhere in their filenames. 
@@ -183,7 +204,7 @@ The consensus sequences will be named `samplename`.`serotype`.`depth`.cons.fa
 This can be useful for troubleshooting amplicon dropouts - something that happened with covid as the virus gathered mutations in the primer binding regions.  
 Just point the script towards the output directory from the previous step (`outputdirectory` in the example above). It will plot the depth at each position on the genome and store the outputs in `outputdirectory/depth/`.  
 ```bash
-sh ~/Tools/DENV_Amplicon/denv_illumina_plotdepth.sh outputdirectory
+sh ~/Tools/DENV_Amplicon/illumina_plotdepth.sh outputdirectory
 ```
 
 #### Nextclade
